@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:04.217
+Sloth Pulse turns Git activity into a local standup draft.
+
+00:00:05.100 --> 00:00:10.763
+Five synthetic commits, a real traceback, and a deliberately fake key supply the context.
+
+00:00:11.100 --> 00:00:15.813
+Preview the context first. Common credential patterns are masked before inference.
+
+00:00:16.200 --> 00:00:21.874
+Downloaded Gemma now generates the draft. This recorded wait plays at its actual speed.
+
+00:00:26.700 --> 00:00:35.093
+The saved Markdown contains completed work, reported blockers, and suggested next steps. Every item includes a source reference.
+
+00:00:35.700 --> 00:00:41.885
+Check each receipt against the input. Source validation cannot prove the interpretation is correct.
+
+00:00:42.750 --> 00:00:46.797
+Run it locally. Review the draft. Find Sloth Pulse on GitHub.

@@ -11,6 +11,8 @@
 - [benchmark.py](benchmark.py) runs the real CLI against downloaded local Gemma, captures timestamped stdout, and saves a [terminal cast](demo-assets/session.cast).
 - The MP4 is a presentation replay of that cast, with explanatory title and source cards. The recorded model wait is played at 1×; explanatory cards are held for readability. It is not a screen capture of a live shell session.
 - The captured CLI reports **10.33 s**; external process measurement is **10.396 s**. All output and references come from the committed [run.json](demo-assets/run.json).
+- English synthetic narration was added on October 22, 2026 using local [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M), voice `af_heart`, through [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx). The original H.264 video stream and its 47.5-second timeline are preserved. The MP4 contains AAC audio and an English subtitle track; the website also provides WebVTT captions.
+- Narration model weights are Apache 2.0 licensed and kokoro-onnx is MIT licensed. Model files and synthesis dependencies are used only for media preparation and are not required by the CLI.
 - Full environment, nine-run results, and limitations: [BENCHMARK.md](BENCHMARK.md).
 
 ## Files
@@ -22,7 +24,10 @@
 | [transcript.txt](demo-assets/transcript.txt) | Captured terminal output |
 | [session.cast](demo-assets/session.cast) | Timestamped terminal replay source |
 | [benchmark.json](demo-assets/benchmark.json) | All nine final real-model measurements |
-| [demo.mp4](demo-assets/demo.mp4) | 47.5-second video presentation |
+| [demo.mp4](demo-assets/demo.mp4) | 47.5-second video with English synthetic narration |
+| [narration.json](demo-assets/narration.json) | Exact script, cue timings, voice settings, model hashes |
+| [narration.wav](demo-assets/narration.wav) | Unnormalized narration mix used to prepare the MP4 audio |
+| [narration.vtt](demo-assets/narration.vtt) / [narration.srt](demo-assets/narration.srt) | English captions |
 | [poster.png](demo-assets/poster.png) | Video title card |
 | [website/](website/) | Buildless interactive source explorer using the recorded data |
 
@@ -33,3 +38,11 @@ The interactive website is a recorded-data demonstration. It does not run infere
 Follow the [README](README.md#reproduce-the-demo). `python3 benchmark.py --runs 3` repeats all three scenarios. The benchmark regenerates text, JSON, and cast artifacts; video/poster rendering is separate. A different day's fixture will have different commit hashes and timestamps.
 
 The application still requires a human to review its interpretations. Source validation is not a semantic accuracy guarantee.
+
+## Narration preparation
+
+Narration uses Kokoro v1.0 model and voice files from the kokoro-onnx `model-files-v1.1` release. Their SHA-256 hashes are recorded in `narration.json`. The synthesis environment used Python 3.12.14, kokoro-onnx 0.6.1, ONNX Runtime 1.31.0, and SoundFile 0.13.1. The public prerecorded script contains no private repository input.
+
+Each cue was generated separately and placed at its recorded start time in a 24 kHz mono WAV. Short boundary fades avoid clicks. The video was muxed without re-encoding its video stream, with AAC audio normalized toward -16 LUFS and a -1.5 dB true-peak target. There is no background music. Captions match the spoken script and cue times.
+
+The generation wait remains at its captured speed; narration and caption preparation do not constitute a new inference benchmark.

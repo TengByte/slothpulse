@@ -1,0 +1,69 @@
+{
+  "voice": "af_heart",
+  "model": "Kokoro-82M v1.0, via kokoro-onnx 0.6.1",
+  "language": "en-us",
+  "synthetic_voice": true,
+  "video_duration_seconds": 47.5,
+  "segments": [
+    {
+      "start": 0.25,
+      "end": 4.8,
+      "text": "Sloth Pulse turns Git activity into a local standup draft.",
+      "spoken_duration_seconds": 3.967,
+      "speed": 1.04,
+      "caption_end": 4.217
+    },
+    {
+      "start": 5.1,
+      "end": 10.85,
+      "text": "Five synthetic commits, a real traceback, and a deliberately fake key supply the context.",
+      "spoken_duration_seconds": 5.663,
+      "speed": 1.04,
+      "caption_end": 10.763
+    },
+    {
+      "start": 11.1,
+      "end": 15.85,
+      "text": "Preview the context first. Common credential patterns are masked before inference.",
+      "spoken_duration_seconds": 4.713,
+      "speed": 1.1342,
+      "caption_end": 15.813
+    },
+    {
+      "start": 16.2,
+      "end": 26.2,
+      "text": "Downloaded Gemma now generates the draft. This recorded wait plays at its actual speed.",
+      "spoken_duration_seconds": 5.674,
+      "speed": 1.04,
+      "caption_end": 21.874
+    },
+    {
+      "start": 26.7,
+      "end": 35.25,
+      "text": "The saved Markdown contains completed work, reported blockers, and suggested next steps. Every item includes a source reference.",
+      "spoken_duration_seconds": 8.393,
+      "speed": 1.04,
+      "caption_end": 35.093
+    },
+    {
+      "start": 35.7,
+      "end": 42.25,
+      "text": "Check each receipt against the input. Source validation cannot prove the interpretation is correct.",
+      "spoken_duration_seconds": 6.185,
+      "speed": 1.04,
+      "caption_end": 41.885
+    },
+    {
+      "start": 42.75,
+      "end": 47.25,
+      "text": "Run it locally. Review the draft. Find Sloth Pulse on GitHub.",
+      "spoken_duration_seconds": 4.047,
+      "speed": 1.04,
+      "caption_end": 46.797
+    }
+  ],
+  "asset_sha256": {
+    "kokoro-v1.0.onnx": "beb0d1848dee9a49da392cc3df26958d46cfa35d321edf434f52949153f0df3a",
+    "voices-v1.0.bin": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+  }
+}
