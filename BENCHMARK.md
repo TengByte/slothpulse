@@ -47,6 +47,6 @@ The benchmark replaces the generated assets in `demo-assets/`; keep a copy if yo
 
 ## Compatibility
 
-The local unit suite has 23 tests and does not need Ollama. Python sources are parsed against Python 3.8 syntax locally; GitHub Actions additionally exercises real Python 3.8 and 3.14 interpreters. Local inference timings were measured only with Python 3.14.5 and the Gemma version above.
+The local unit suite has 23 tests and does not need Ollama. Python sources passed a Python 3.8 syntax check locally. [GitHub Actions run 39720013941](https://github.com/TengByte/slothpulse/actions/runs/39720013941) passed the suite on real Python 3.8 and 3.14 interpreters. Local inference timings were measured only with Python 3.14.5 and the Gemma version above.
 
 There is no measured human baseline. We make no claim that the tool saves 15 minutes, eliminates review, or achieves 100% factual accuracy.
