@@ -1,8 +1,8 @@
 # Recorded demonstration
 
-[Watch the 48-second MP4](https://raw.githubusercontent.com/TengByte/slothpulse/main/demo-assets/demo.mp4).
+[Watch with English captions](https://tengli.dev/posts/slothpulse-source-bindings.html#demo) · [Interactive recorded demo](https://slothpulse.chicangel12.chatgpt.site/#replay) · [Download MP4](https://raw.githubusercontent.com/TengByte/slothpulse/main/demo-assets/demo.mp4).
 
-[![SlothPulse demonstration](demo-assets/poster.png)](https://raw.githubusercontent.com/TengByte/slothpulse/main/demo-assets/demo.mp4)
+https://github.com/user-attachments/assets/5bdbd9c7-d788-4cda-9394-b79f1ff9f0cf
 
 ## Provenance
 
