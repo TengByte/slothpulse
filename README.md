@@ -16,32 +16,56 @@ SlothPulse is a 100% local, privacy-first CLI agent that turns recent Git activi
 
 ## Quick Start
 
-Download and start Gemma with Ollama:
+Install [Ollama](https://ollama.com/download) first. On macOS you can use `brew install ollama`. If the Ollama desktop app is not running, start the local server in a terminal and leave it open:
+
+```bash
+ollama serve
+```
+
+In another terminal, download and start the default Gemma model (about 5 GB):
 
 ```bash
 ollama run gemma
 ```
 
-In another terminal, run SlothPulse from your Git repository:
+Once the model is ready, type `/bye` to leave its interactive chat. Clone SlothPulse:
 
 ```bash
-python slothpulse.py -e "error text"
+git clone https://github.com/TengByte/slothpulse.git
+cd slothpulse
 ```
 
-In a second terminal, run SlothPulse from a Git repository:
+Generate a digest from the repository's recent activity and an optional error:
 
 ```bash
-python slothpulse.py -e "AttributeError: 'NoneType' object has no attribute 'get'"
+python3 slothpulse.py -e "AttributeError: 'NoneType' object has no attribute 'get'"
 ```
+
+On systems where Python 3 is named `python`, the equivalent is `python slothpulse.py -e "error text"`.
 
 To choose another Ollama model or a repository explicitly:
 
 ```bash
-python slothpulse.py --model gemma:latest --repo /path/to/repository
+python3 slothpulse.py --model gemma:latest --repo /path/to/repository
 ```
 
-Each response is appended to `~/.slothpulse/digest.md` with a local timestamp. The script sends the prompt only to `http://localhost:11434`; it has no cloud service or third-party Python dependencies.
+Each response is appended to `~/.slothpulse/digest.md` with a local timestamp. The script sends the prompt only to `http://localhost:11434`, bypassing HTTP proxies. It has no cloud service or third-party Python dependencies. The initial Ollama/model installation needs internet access; inference uses the downloaded local model.
+
+## Troubleshooting
+
+- **Connection refused:** Start Ollama with `ollama serve` or open the desktop app.
+- **Model not found:** Run `ollama pull gemma:latest` (or pull the model you passed to `--model`).
+- **Git history unavailable:** Pass a Git repository to `--repo`. SlothPulse can still summarize the supplied error without Git history.
+- **Slow first run:** Model loading and inference depend on your hardware; SlothPulse waits up to 120 seconds for a response.
+
+## Checks
+
+Run the standard-library tests without downloading a model:
+
+```bash
+python3 -m unittest -v
+```
 
 ## Demo
 
-The command above is the demo flow. Run it with Ollama and Gemma installed to generate a real digest; no generated sample is presented as model output.
+See [captured Gemma output and local verification results](DEMO.md). On an Apple M5 with 16 GB RAM, the measured invocation with the example error completed in 5.87 seconds after unloading the model; two further scenarios completed in 3.08 and 4.24 seconds. Each generated exactly three sections and appended the digest successfully. Your timings will depend on hardware, model loading, and input length.
