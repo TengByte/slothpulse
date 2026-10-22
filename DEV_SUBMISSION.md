@@ -68,17 +68,16 @@ Before generating, `--preview` shows the sanitized input without a model call or
 
 ## 🦥 The Lazy Payoff
 
-The chore becomes **reviewing a draft instead of assembling one from scattered context**. The output is ordinary Markdown, ready to edit wherever I keep my notes.
+The chore becomes **reviewing a draft instead of assembling one from scattered context**. To check this beyond the demo fixture, I ran SlothPulse on this project’s **six real commits**, using local Gemma on an Apple M5 / 16 GB:
 
-I ran three synthetic scenarios three times each on an **Apple M5 / 16 GB** with local `gemma:latest`:
-
-| Input | Median process time |
+| Invocation | Whole process time |
 | --- | ---: |
-| Five commits + one error | 7.668 s |
-| Five commits only | 6.495 s |
-| Error only | 3.926 s |
+| Model initially unloaded | 13.619 s |
+| Immediate repeat | 8.720 s |
 
-All nine final runs passed the structural and workflow checks; 23 unit tests cover failure boundaries. These are generation timings on a small synthetic batch, not a measurement of human time saved or factual accuracy. [Raw results and reproduction steps](https://github.com/TengByte/slothpulse/blob/main/BENCHMARK.md).
+Review caught one important correction among the six completed-work items: Gemma turned **“submission handoff” into “submitted,”** while this entry was still a draft. The receipt made that mismatch easy to locate. The raw output and the corrected version are both preserved in the [repository trial](https://github.com/TengByte/slothpulse/tree/main/evidence/real-repo-2026-10-21).
+
+This was an AI-assisted source check, not a human standup study. Manual preparation time and human editing effort remain unmeasured. The earlier [nine-run synthetic benchmark and 23 unit tests](https://github.com/TengByte/slothpulse/blob/main/BENCHMARK.md) check workflow behavior and failure boundaries; factual accuracy still needs review.
 
 ## 🏆 Prize Categories
 

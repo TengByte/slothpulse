@@ -39,3 +39,7 @@ Added a synthetic repository with older activity, another author, a real generat
 Source coverage is not factual verification. One summary per commit can be repetitive; eight commits can miss part of a busy day. Commit subjects omit important context. A malicious or misleading source can still affect prose despite instructions to ignore embedded commands. The tool executes no model-proposed commands and requires human review before sharing.
 
 Useful next work would be human evaluation on deliberately misleading commit subjects, clearer grouping without losing source coverage, and optional diff context with explicit preview. These are future work, not shipped features.
+
+## 7. Real repository input exposed a status overclaim
+
+After the synthetic benchmark, two invocations on this project’s six actual commits both changed “submission handoff” into “submitted.” The DEV entry remained a draft. All source IDs were valid. This is a concrete example of the semantic limit described above: preserving a relationship does not establish the truth of its prose. An AI-assisted source review corrected the status in a separately labeled derivative and retained both raw outputs. The trial measured 13.619 s and 8.720 s of whole-process runtime; it did not measure a human’s editing effort, standup use, or minutes saved. See [the full trial](evidence/real-repo-2026-10-21/README.md).

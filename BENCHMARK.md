@@ -50,3 +50,7 @@ The benchmark replaces the generated assets in `demo-assets/`; keep a copy if yo
 The local unit suite has 23 tests and does not need Ollama. Python sources passed a Python 3.8 syntax check locally. [GitHub Actions run 39720013941](https://github.com/TengByte/slothpulse/actions/runs/39720013941) passed the suite on real Python 3.8 and 3.14 interpreters. Local inference timings were measured only with Python 3.14.5 and the Gemma version above.
 
 There is no measured human baseline. We make no claim that the tool saves 15 minutes, eliminates review, or achieves 100% factual accuracy.
+
+## Additional trial on real project commits
+
+An [agent-assisted trial on six real SlothPulse commits](evidence/real-repo-2026-10-21/README.md) took 13.619 s with the model initially unloaded and 8.720 s for an immediate repeat. Both invocations passed the source/shape checks but incorrectly summarized “submission handoff” as “submitted.” Raw output and an explicitly labeled reviewed derivative are preserved. One of six completed-work items required a status correction; no human editing percentage or time-saved baseline was measured. These two calls are separate from the nine-run synthetic benchmark above.

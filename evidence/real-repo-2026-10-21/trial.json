@@ -1,0 +1,25 @@
+{
+  "repository": "https://github.com/TengByte/slothpulse",
+  "input_head": "39ecac6807d5b31bc93b3716bfa080c28c0c3534",
+  "context": "Real public project commits; AI-assisted development, no human standup usage or time-savings baseline measured.",
+  "records": [
+    {
+      "label": "initially-unloaded",
+      "external_process_seconds": 13.619,
+      "exit_code": 0,
+      "cli_seconds": 13.54,
+      "commit_count": 6,
+      "error_count": 0,
+      "attempts": 1
+    },
+    {
+      "label": "repeat",
+      "external_process_seconds": 8.72,
+      "exit_code": 0,
+      "cli_seconds": 8.62,
+      "commit_count": 6,
+      "error_count": 0,
+      "attempts": 1
+    }
+  ]
+}
