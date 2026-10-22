@@ -1,8 +1,9 @@
 ---
 title: "SlothPulse: I wrote the code. Gemma can draft the standup."
-published: false
+published: true
 cover_image: https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/066m62f38lvloc1c8mxu.png
 tags: devchallenge, hf26challenge, gemma, python
+canonical_url: https://dev.to/tengbyte/slothpulse-i-wrote-the-code-gemma-can-draft-the-standup-2bhp
 ---
 
 *This is a submission for the [Hacktoberfest Open-Source AI Challenge Week 3: Slow and Steady](https://dev.to/challenges/hacktoberfest-week3-2026-10-19).*

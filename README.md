@@ -2,7 +2,7 @@
 
 **Your standup, with receipts.** A local, privacy-first Python CLI that turns Git activity and user-reported errors into a Gemma-written Markdown draft. Every item points back to supplied evidence. No external Python packages.
 
-[Interactive recorded demo](https://slothpulse.chicangel12.chatgpt.site) · [Watch the 48-second demo](https://raw.githubusercontent.com/TengByte/slothpulse/main/demo-assets/demo.mp4) · [Captured draft](demo-assets/digest.md) · [Measurements](BENCHMARK.md) · [Build decisions](BUILD_LOG.md)
+[DEV contest entry](https://dev.to/tengbyte/slothpulse-i-wrote-the-code-gemma-can-draft-the-standup-2bhp) · [Interactive recorded demo](https://slothpulse.chicangel12.chatgpt.site) · [Watch the 48-second demo](https://raw.githubusercontent.com/TengByte/slothpulse/main/demo-assets/demo.mp4) · [Captured draft](demo-assets/digest.md) · [Measurements](BENCHMARK.md) · [Build decisions](BUILD_LOG.md)
 
 [![Recorded local demonstration](demo-assets/poster.png)](https://raw.githubusercontent.com/TengByte/slothpulse/main/demo-assets/demo.mp4)
 
