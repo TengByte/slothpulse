@@ -1,0 +1,121 @@
+{
+  "model": "gemma:latest",
+  "elapsed_seconds": 10.33,
+  "evidence": {
+    "commits": [
+      {
+        "id": "C1",
+        "hash": "1a58cc5",
+        "author": "Teng Demo",
+        "date": "2026-10-21T09:07:00-07:00",
+        "subject": "fix: preserve export job IDs across retries",
+        "relative": "12 hours ago"
+      },
+      {
+        "id": "C2",
+        "hash": "78bf55f",
+        "author": "Teng Demo",
+        "date": "2026-10-21T09:06:00-07:00",
+        "subject": "docs: add local worker startup instructions",
+        "relative": "12 hours ago"
+      },
+      {
+        "id": "C3",
+        "hash": "d09a6ed",
+        "author": "Teng Demo",
+        "date": "2026-10-21T09:05:00-07:00",
+        "subject": "test: cover empty export jobs",
+        "relative": "12 hours ago"
+      },
+      {
+        "id": "C4",
+        "hash": "c5147cc",
+        "author": "Teng Demo",
+        "date": "2026-10-21T09:04:00-07:00",
+        "subject": "fix: handle empty export jobs without crashing",
+        "relative": "12 hours ago"
+      },
+      {
+        "id": "C5",
+        "hash": "8951993",
+        "author": "Teng Demo",
+        "date": "2026-10-21T09:03:00-07:00",
+        "subject": "feat: queue CSV exports for background processing",
+        "relative": "12 hours ago"
+      }
+    ],
+    "errors": [
+      {
+        "id": "E1",
+        "source": "--error-file",
+        "text": "EXPORT_API_KEY=[REDACTED]\nTraceback (most recent call last):\n  File \"worker.py\", line 5, in <module>\n    print(download_url({\"job_id\": \"demo-42\"}))\n          ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"worker.py\", line 2, in download_url\n    return job[\"result\"][\"download_url\"]\n           ~~~^^^^^^^^^^\nKeyError: 'result'"
+      }
+    ],
+    "warning": null,
+    "redactions": 1,
+    "scope": "today",
+    "author_filter": "Teng Demo"
+  },
+  "plan": {
+    "completed": [
+      {
+        "text": "Fixed issue where export job IDs were lost during retries.",
+        "evidence": [
+          "C1"
+        ]
+      },
+      {
+        "text": "Added local worker startup instructions to the documentation.",
+        "evidence": [
+          "C2"
+        ]
+      },
+      {
+        "text": "Covered empty export jobs in tests.",
+        "evidence": [
+          "C3"
+        ]
+      },
+      {
+        "text": "Handled empty export jobs without crashing the system.",
+        "evidence": [
+          "C4"
+        ]
+      },
+      {
+        "text": "Queued CSV exports for background processing.",
+        "evidence": [
+          "C5"
+        ]
+      }
+    ],
+    "blockers": [
+      {
+        "text": "KeyError: 'result' while downloading job results.",
+        "evidence": [
+          "E1"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "text": "Investigate the origin of the KeyError and potential data access issues in worker.py.",
+        "evidence": [
+          "E1"
+        ]
+      }
+    ]
+  },
+  "metrics": {
+    "total_duration": 10215630166,
+    "load_duration": 23547958,
+    "prompt_eval_count": 1261,
+    "eval_count": 161,
+    "eval_duration": 7425991000,
+    "attempts": 1
+  },
+  "checks": {
+    "source_ids_valid": true,
+    "section_count": 3
+  }
+}

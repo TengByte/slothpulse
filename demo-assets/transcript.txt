@@ -1,0 +1,30 @@
+Reading 5 commits and 1 error inputs; 1 credential-like matches masked.
+Generating locally with gemma:latest...
+Digest saved to /var/folders/nc/dwv8yyw550b_v8g7yrjgl9sh0000gn/T/slothpulse-benchmark-nsece1cs/commits_and_error-1.md (10.33s; source IDs checked).
+
+Preview:
+
+### 🛠️ What I Did Today
+
+- Fixed issue where export job IDs were lost during retries. [^C1]
+- Added local worker startup instructions to the documentation. [^C2]
+- Covered empty export jobs in tests. [^C3]
+- Handled empty export jobs without crashing the system. [^C4]
+- Queued CSV exports for background processing. [^C5]
+
+### 🐛 Blockers & Bugs
+
+- User-reported: KeyError: 'result' while downloading job results. [^E1]
+
+### 🚀 Next Steps
+
+- Suggested: Investigate the origin of the KeyError and potential data access issues in worker.py. [^E1]
+
+*Context: today. Source references identify supplied evidence; review the model's interpretation before sharing.*
+
+[^C1]: Commit `1a58cc5` — Teng Demo, 2026-10-21: fix: preserve export job IDs across retries
+[^C2]: Commit `78bf55f` — Teng Demo, 2026-10-21: docs: add local worker startup instructions
+[^C3]: Commit `d09a6ed` — Teng Demo, 2026-10-21: test: cover empty export jobs
+[^C4]: Commit `c5147cc` — Teng Demo, 2026-10-21: fix: handle empty export jobs without crashing
+[^C5]: Commit `8951993` — Teng Demo, 2026-10-21: feat: queue CSV exports for background processing
+[^E1]: User-provided error (cause unverified): KeyError: 'result'

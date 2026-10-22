@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+"""Run reproducible synthetic scenarios against real local Gemma. No network services except localhost Ollama."""
+import argparse
+import json
+import pathlib
+import selectors
+import statistics
+import subprocess
+import sys
+import tempfile
+import time
+
+from make_demo import create_demo
+
+ROOT = pathlib.Path(__file__).resolve().parent
+FAKE_KEY = 'demo_fixture_key_not_a_real_credential_12345'
+HEADINGS = ['### 🛠️ What I Did Today', '### 🐛 Blockers & Bugs', '### 🚀 Next Steps']
+
+
+def run_capture(command, cast_path=None):
+    start = time.monotonic()
+    proc = subprocess.Popen(command, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    frames, chunks = [], []
+    selector = selectors.DefaultSelector()
+    selector.register(proc.stdout, selectors.EVENT_READ)
+    while selector.get_map():
+        for key, _ in selector.select(timeout=1):
+            chunk = key.fileobj.read1(8192)
+            if not chunk:
+                selector.unregister(key.fileobj)
+                continue
+            chunks.append(chunk)
+            frames.append([round(time.monotonic() - start, 4), 'o', chunk.decode('utf-8', errors='replace').replace('\n', '\r\n')])
+    status = proc.wait()
+    elapsed = round(time.monotonic() - start, 3)
+    if cast_path:
+        header = {'version': 2, 'width': 110, 'height': 48, 'timestamp': int(time.time()), 'title': 'SlothPulse — real local Gemma run; synthetic fixture', 'env': {'TERM': 'xterm-256color'}}
+        with cast_path.open('w', encoding='utf-8') as cast:
+            cast.write(json.dumps(header) + '\n')
+            for frame in frames:
+                cast.write(json.dumps(frame, ensure_ascii=False) + '\n')
+    return status, b''.join(chunks).decode('utf-8', errors='replace'), elapsed
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--runs', type=int, default=3)
+    parser.add_argument('--model', default='gemma:latest')
+    args = parser.parse_args()
+    if not 1 <= args.runs <= 10:
+        parser.error('--runs must be between 1 and 10')
+    records = []
+    out = ROOT / 'demo-assets'
+    out.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='slothpulse-benchmark-') as temp:
+        repo = create_demo(pathlib.Path(temp) / 'fixture')
+        empty = pathlib.Path(temp) / 'not-a-repo'
+        empty.mkdir()
+        cases = [
+            ('commits_and_error', ['--repo', str(repo), '--since', 'today', '--author', 'Teng Demo', '--error-file', str(repo / 'error.txt')], 5, 1),
+            ('commits_only', ['--repo', str(repo), '--since', 'today', '--author', 'Teng Demo'], 5, 0),
+            ('error_only', ['--repo', str(empty), '--error-file', str(repo / 'error.txt')], 0, 1),
+        ]
+        for name, flags, commit_count, error_count in cases:
+            for run in range(1, args.runs + 1):
+                digest_path = pathlib.Path(temp) / ('{}-{}.md'.format(name, run))
+                report_path = digest_path.with_suffix('.json')
+                command = [sys.executable, str(ROOT / 'slothpulse.py')] + flags + ['--model', args.model, '--output', str(digest_path), '--report', str(report_path)]
+                cast = out / 'session.cast' if name == 'commits_and_error' and run == 1 else None
+                status, stdout, elapsed = run_capture(command, cast)
+                record = {'scenario': name, 'run': run, 'elapsed_seconds': elapsed, 'exit_code': status}
+                if status == 0:
+                    report = json.loads(report_path.read_text(encoding='utf-8'))
+                    text = digest_path.read_text(encoding='utf-8')
+                    preview = stdout.split('Preview:\n\n', 1)[1].strip()
+                    checks = {
+                        'three_sections': [s for s in preview.splitlines() if s.startswith('#')] == HEADINGS,
+                        'expected_scope': len(report['evidence']['commits']) == commit_count and len(report['evidence']['errors']) == error_count,
+                        'known_source_ids': report['checks']['source_ids_valid'],
+                        'credential_masked': FAKE_KEY not in stdout and FAKE_KEY not in report_path.read_text(encoding='utf-8'),
+                        'saved': preview in text,
+                    }
+                    record.update(checks=checks, attempts=report['metrics']['attempts'], generated_tokens=report['metrics'].get('eval_count'), passed=all(checks.values()))
+                    if cast:
+                        (out / 'run.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
+                        (out / 'digest.md').write_text(preview + '\n', encoding='utf-8')
+                        (out / 'transcript.txt').write_text(stdout, encoding='utf-8')
+                else:
+                    record.update(passed=False, failure=stdout)
+                records.append(record)
+                (out / 'benchmark.json').write_text(json.dumps({'model': args.model, 'fixture': 'synthetic; generated by make_demo.py', 'runs_per_scenario': args.runs, 'records': records}, ensure_ascii=False, indent=2), encoding='utf-8')
+                print('{} run {}: {} ({:.3f}s)'.format(name, run, 'PASS' if record['passed'] else 'FAIL', elapsed), flush=True)
+                if not record['passed']:
+                    print(stdout, flush=True)
+                    return 1
+    summary = {name: round(statistics.median(r['elapsed_seconds'] for r in records if r['scenario'] == name), 3) for name, _, _, _ in cases}
+    print('Median seconds: ' + json.dumps(summary), flush=True)
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())
