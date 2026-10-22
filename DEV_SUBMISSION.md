@@ -1,6 +1,7 @@
 ---
 title: How I Built a 100% Local Dev Digest Agent with Gemma to Stop Reading My Own Git Logs
 published: false
+cover_image: https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/066m62f38lvloc1c8mxu.png
 tags: devchallenge, hf26challenge, gemma, python
 ---
 
@@ -22,6 +23,8 @@ The useful detail is the receipt beside each item. A commit summary has a `C` so
 
 ## 🎥 Demo
 
+**[Explore the interactive demo](https://slothpulse.chicangel12.chatgpt.site)** — inspect the captured draft, click its source receipts, and watch the recorded run. The page uses public synthetic example data.
+
 [![Watch the recorded SlothPulse workflow](https://raw.githubusercontent.com/TengByte/slothpulse/main/demo-assets/poster.png)](https://raw.githubusercontent.com/TengByte/slothpulse/main/demo-assets/demo.mp4)
 
 **[Watch the 48-second video](https://raw.githubusercontent.com/TengByte/slothpulse/main/demo-assets/demo.mp4)** · [Read the captured draft](https://github.com/TengByte/slothpulse/blob/main/demo-assets/digest.md) · [Inspect the exact sanitized input and plan](https://github.com/TengByte/slothpulse/blob/main/demo-assets/run.json)
@@ -37,7 +40,7 @@ python3 slothpulse.py --repo /path/to/repo --since today \
   --output standup.md --report run.json
 ```
 
-The preview shows five selected commits, one error, and one credential-shaped match masked. The recorded Gemma call took **10.33 seconds inside the CLI**. The video replays timestamped terminal output at its captured timing and adds explanatory cards. It is a recording, not a hosted model pretending to run on a visitor's machine.
+The preview shows five selected commits, one error, and one credential-shaped match masked. The recorded Gemma call took **10.33 seconds inside the CLI**. The video replays timestamped terminal output at its captured timing and adds explanatory cards.
 
 For a quick single-error example:
 
@@ -47,7 +50,7 @@ python slothpulse.py -e "AttributeError: 'NoneType' object has no attribute 'get
 
 ## 💻 Code
 
-{% github TengByte/slothpulse %}
+{% github TengByte/slothpulse no-readme %}
 
 [Source and setup](https://github.com/TengByte/slothpulse) · [Reproducible measurements](https://github.com/TengByte/slothpulse/blob/main/BENCHMARK.md) · [Edited build log](https://github.com/TengByte/slothpulse/blob/main/BUILD_LOG.md)
 
@@ -57,7 +60,7 @@ The CLI, tests, fixture generator, and benchmark use Python's standard library. 
 
 The stack is deliberately small: `subprocess` for Git, `urllib.request` for Ollama, `json` for the contract, and Gemma for language. There is no framework or external Python package between the input and the saved note.
 
-### The first fix was not another adjective in the prompt
+### Making source coverage part of the contract
 
 Free-text Markdown gave the model control over both the prose and the structure. Tightening the wording helped, but it did not create a reliable boundary.
 

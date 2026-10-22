@@ -11,7 +11,7 @@ Prepared for Hacktoberfest 2026 Week 3, “Slow and Steady.”
 - Inspectable input, output, cast, metrics, and edited build log
 - MIT application license; third-party model/runtime terms remain separate
 - English article with required tags, open-innovation explanation, and Gemma category: [DEV_SUBMISSION.md](DEV_SUBMISSION.md)
-- Hosted source explorer: https://slothpulse.chicangel12.chatgpt.site (initial deployment is owner-private; public video above is accessible separately)
+- Hosted source explorer: https://slothpulse.chicangel12.chatgpt.site (public; uses only synthetic example data)
 
 ## Final account steps
 
@@ -26,6 +26,8 @@ Only claim **Best Use of Gemma** as currently written. Other partner categories 
 
 ## Current status
 
-The article is ready in the repository. It has **not** yet been saved to an authenticated DEV account or published as a contest entry. Final prize-contest entry and acceptance of its rules require the entrant's own action.
+The article is saved as a DEV draft in the TengByte account, with both official tags, a public demo link, and an AI-generation disclosure. It has **not** been published as a contest entry.
 
-If the hosted source explorer is made public later, add its URL near the video's link in the article. It contains only the same public synthetic sample and recorded results.
+Authenticated editor: https://dev.to/tengbyte/how-i-built-a-100-local-dev-digest-agent-with-gemma-to-stop-reading-my-own-git-logs-517o-temp-slug-7175990/edit Final prize-contest entry and acceptance of its rules require the entrant's own action.
+
+The source explorer is public and linked in the saved draft. The companion engineering recap is prepared on the personal-site repository's `codex/slothpulse-recap` branch; publish it after the DEV entry and add the final DEV URL.
